@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080c17">
+<title>RGB IoT Controller</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div><div class="eyebrow">ESP8266 • HiveMQ</div><h1>کنترلر RGB</h1><p>کنترل آنلاین چراغ و مشاهده وضعیت سنسورها</p></div>
+  <div id="connectionBadge" class="badge"><i></i><span id="connectionText">قطع</span></div>
+</header>
+
+<main class="grid">
+<section class="card hero">
+  <div id="lightPreview" class="light"><div class="core"></div></div>
+  <div class="hero-info">
+    <div><span>دستگاه</span><b id="deviceState">OFFLINE</b></div>
+    <div><span>حالت</span><b id="modeText">AUTO</b></div>
+    <div><span>رنگ</span><b id="colorText">قرمز</b></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="title"><h2>اتصال HiveMQ</h2><span id="mqttState" class="pill">Disconnected</span></div>
+  <div class="form">
+    <label>Host<input id="host" value="090dc724cffd407b9a8e3eca177cf993.s1.eu.hivemq.cloud"></label>
+    <label>WebSocket Port<input id="port" type="number" value="8884"></label>
+    <label>Username<input id="username" autocomplete="username"></label>
+    <label>Password<input id="password" type="password" autocomplete="current-password"></label>
+  </div>
+  <div class="actions"><button id="connectBtn" class="btn primary">اتصال</button><button id="disconnectBtn" class="btn" disabled>قطع اتصال</button></div>
+  <small>رمز HiveMQ را داخل فایل JavaScript قرار نده؛ این فرم برای اتصال همین مرورگر است.</small>
+</section>
+
+<section class="card wide">
+  <div class="title"><h2>کنترل اصلی</h2><span id="lastUpdate">—</span></div>
+  <div class="controls">
+    <button class="control" data-command="MANUAL">✋<span>MANUAL</span></button>
+    <button class="control" data-command="AUTO">⚙️<span>AUTO</span></button>
+    <button class="control accent" data-command="RAINBOW">🌈<span>Rainbow</span></button>
+    <button class="control" data-command="COLOR">🎨<span>رنگ بعدی</span></button>
+  </div>
+</section>
+
+<section class="card wide">
+  <div class="title"><h2>انتخاب رنگ</h2><i id="selectedColorDot"></i></div>
+  <div class="colors">
+    <button class="color red" data-color="0"><i></i>قرمز</button>
+    <button class="color green" data-color="1"><i></i>سبز</button>
+    <button class="color blue" data-color="2"><i></i>آبی</button>
+    <button class="color yellow" data-color="3"><i></i>زرد</button>
+    <button class="color purple" data-color="4"><i></i>بنفش</button>
+    <button class="color cyan" data-color="5"><i></i>فیروزه‌ای</button>
+    <button class="color white" data-color="6"><i></i>سفید</button>
+  </div>
+</section>
+
+<section class="card wide">
+  <div class="title"><h2>روشنایی</h2><b id="brightnessValue">75%</b></div>
+  <input id="brightnessSlider" class="range" type="range" min="0" max="4" step="1" value="3">
+  <div class="labels"><span>خاموش</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+  <div class="actions"><button class="btn" data-command="BRIGHTNESS_DOWN">− کاهش</button><button class="btn" data-command="BRIGHTNESS_UP">+ افزایش</button></div>
+</section>
+
+<section class="card sensor"><div class="title"><h2>PIR</h2><span id="pirPill" class="pill">بدون حرکت</span></div><strong id="pirValue" class="big">—</strong><small>تشخیص حرکت</small></section>
+<section class="card sensor"><div class="title"><h2>LDR</h2><span id="ldrPill" class="pill">—</span></div><strong class="big"><span id="ldrValue">—</span>%</strong><div class="progress"><i id="ldrProgress"></i></div><small>روشنایی محیط</small></section>
+<section class="card sensor"><div class="title"><h2>Wi‑Fi</h2><span id="wifiPill" class="pill">—</span></div><strong id="rssiValue" class="big">—</strong><small>RSSI / dBm</small></section>
+<section class="card sensor"><div class="title"><h2>Uptime</h2></div><strong id="uptimeValue" class="big">—</strong><small>زمان روشن بودن ESP</small></section>
+
+<section class="card wide">
+  <div class="title"><h2>گزارش اتصال</h2><button id="clearLogBtn" class="text">پاک کردن</button></div>
+  <pre id="log"></pre>
+</section>
+</main>
+<footer><span>RGB IoT Controller</span><span>MQTT over Secure WebSocket</span></footer>
+</div>
+<script src="https://unpkg.com/mqtt@5.15.2/dist/mqtt.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
