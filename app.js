@@ -7,12 +7,12 @@ const CONFIG={
 };
 
 const COLORS=[
-  {name:"قرمز",rgb:[255,0,0],css:"#ff3131"},
-  {name:"سبز",rgb:[0,255,0],css:"#29e36b"},
-  {name:"آبی",rgb:[0,0,255],css:"#3d7cff"},
-  {name:"زرد",rgb:[255,255,0],css:"#ffe43d"},
-  {name:"بنفش",rgb:[255,0,255],css:"#cf5cff"},
-  {name:"فیروزه‌ای",rgb:[0,255,255],css:"#30e8ff"},
+  {name:"قرمز",rgb:[255,0,0],css:"#ff0000"},
+  {name:"سبز",rgb:[0,255,0],css:"#00ff00"},
+  {name:"آبی",rgb:[0,0,255],css:"#0000ff"},
+  {name:"زرد",rgb:[255,255,0],css:"#ffff00"},
+  {name:"بنفش",rgb:[255,0,255],css:"#ff00ff"},
+  {name:"فیروزه‌ای",rgb:[0,255,255],css:"#00ffff"},
   {name:"سفید",rgb:[255,255,255],css:"#fff"}
 ];
 const BR=[0,25,50,75,100];
@@ -111,7 +111,7 @@ function showStatus(text){
 function preview(c,raw,rainbow){
   const box=$("lightPreview"),core=box.querySelector(".core");
   if(rainbow){
-    box.style.background="conic-gradient(#ff3131,#ffe43d,#29e36b,#30e8ff,#3d7cff,#cf5cff,#ff3131)";
+    box.style.background="conic-gradient(#ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000)";
     core.style.background="#fff";core.style.boxShadow="0 0 40px #fff";
     return
   }
